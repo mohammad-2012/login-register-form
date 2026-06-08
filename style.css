@@ -341,33 +341,219 @@ input {
   margin-top: 0.5rem;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+    height: auto;
+    min-height: 560px;
+  }
+  
+  .container .form-container .form {
+    width: 85%;
+  }
+  
+  .container .panel-wrapper .panel-title {
+    font-size: 2.2rem;
+  }
+  
+  .container .panel-wrapper .follow-our-icons .follow-icon {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     width: 95%;
     height: auto;
-    min-height: 600px;
+    min-height: auto;
     flex-direction: column;
+    border-radius: 24px;
+    overflow: visible;
   }
 
   .container .form-container,
   .container .panel-wrapper {
     width: 100%;
-    min-height: 400px;
+    min-height: 460px;
+    border-radius: 24px;
+    transform: none !important;
+    transition: none !important;
   }
 
-  .container.active .form-container {
-    transform: translateY(100%);
+  .container .form-container {
+    order: 2;
+  }
+  
+  .container .panel-wrapper {
+    order: 1;
   }
 
+  .container.active .form-container,
   .container.active .panel-wrapper {
-    transform: translateY(-100%);
+    transform: none !important;
   }
+  
+  .container .form-container .form {
+    width: 85%;
+  }
+  
+  .container .form-container .form-title {
+    font-size: 1.6rem;
+  }
+  
+  .container .form-container .form .input-box .form-input {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .container .form-container .form .form-btn {
+    padding: 0.75rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .container .panel-wrapper {
+    gap: 0.8rem;
+    padding: 1.5rem 0;
+  }
+  
+  .container .panel-wrapper .panel-title {
+    font-size: 1.8rem;
+  }
+  
+  .container .panel-wrapper .panel-text {
+    font-size: 0.85rem;
+  }
+  
+  .container .panel-wrapper .follow-our-icons {
+    gap: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .container .panel-wrapper .follow-our-icons .follow-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+  
+  .container .panel-wrapper .panel-btn {
+    padding: 0.6rem 1.4rem;
+    font-size: 0.75rem;
+  }
+  
+  .btn-container {
+    gap: 0.6rem;
+  }
+}
 
+@media (max-width: 480px) {
+  .container {
+    width: 98%;
+    border-radius: 20px;
+  }
+  
+  .container .form-container,
+  .container .panel-wrapper {
+    min-height: 420px;
+    border-radius: 20px;
+  }
+  
   .container .form-container .form {
     width: 90%;
   }
-
+  
+  .container .form-container .form-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .container .form-container .form .input-box {
+    margin: 0.5rem 0;
+  }
+  
+  .container .form-container .form .input-box .form-input {
+    padding: 0.65rem 0.9rem;
+    font-size: 0.85rem;
+    border-radius: 14px;
+  }
+  
+  .container .form-container .form .input-box .password-input {
+    padding: 0.65rem 2.8rem 0.65rem 0.9rem;
+  }
+  
+  .container .form-container .form .form-btn {
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+    border-radius: 35px;
+  }
+  
+  .container .form-container .form .ends-item {
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .container .form-container .form .ends-item .forgot-pass-text,
+  .container .form-container .form .navigate-link-wrapper,
+  .container .form-container .form .navigate-link {
+    font-size: 0.75rem;
+  }
+  
+  .container .panel-wrapper {
+    gap: 0.6rem;
+    padding: 1rem 0;
+  }
+  
   .container .panel-wrapper .panel-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+  }
+  
+  .container .panel-wrapper .panel-text {
+    font-size: 0.75rem;
+  }
+  
+  .container .panel-wrapper .follow-our-icons {
+    gap: 0.5rem;
+  }
+  
+  .container .panel-wrapper .follow-our-icons .follow-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+  
+  .container .panel-wrapper .panel-btn {
+    padding: 0.5rem 1.2rem;
+    font-size: 0.7rem;
+  }
+  
+  .container .panel-wrapper .follow-our-icons .follow-icon::after {
+    font-size: 0.6rem;
+    top: -28px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 360px) {
+  .container .form-container .form {
+    width: 95%;
+  }
+  
+  .container .form-container .form-title {
+    font-size: 1.3rem;
+  }
+  
+  .container .panel-wrapper .panel-title {
+    font-size: 1.3rem;
+  }
+  
+  .container .panel-wrapper .follow-our-icons .follow-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+  
+  .container .form-container .form .form-btn {
+    font-size: 0.8rem;
   }
 }
