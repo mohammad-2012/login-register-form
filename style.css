@@ -21,7 +21,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  background: #0a0a0a;
   font-family: "varela-round", system-ui, sans-serif;
 }
 
@@ -39,15 +39,17 @@ input {
   width: 1000px;
   height: 640px;
   overflow: hidden;
-  background: white;
+  background: #0f0f0f;
   backdrop-filter: blur(10px);
   border-radius: 28px;
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(0, 255, 170, 0.2);
+  border: 1px solid rgba(0, 255, 170, 0.3);
 }
 
 .container.active .form-container {
@@ -59,7 +61,7 @@ input {
 
 .container .form-container {
   width: 50%;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(20, 20, 20, 0.95);
   height: 100%;
   display: flex;
   justify-content: center;
@@ -73,10 +75,11 @@ input {
 .container .form-container .form-title {
   font-size: 1.8rem;
   margin-bottom: 1rem;
-  color: #1e1b4b;
+  color: #00ffaa;
   font-weight: 700;
   letter-spacing: -0.5px;
   font-family: "Agent-Orange-d", "varela-round", sans-serif;
+  text-shadow: 0 0 10px rgba(0, 255, 170, 0.5);
 }
 
 .container .form-container .form {
@@ -108,41 +111,44 @@ input {
 .container .form-container .form .input-box .form-input {
   width: 100%;
   padding: 0.85rem 1rem;
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
+  background: #252525;
+  border: 2px solid #3a3a3a;
   border-radius: 16px;
   font-size: 0.95rem;
   font-weight: 500;
-  color: #1e1b4b;
+  color: #e0e0e0;
   transition: all 250ms ease-in-out;
   outline: none;
   font-family: "varela-round", system-ui, sans-serif;
 }
 
 .container .form-container .form .input-box .form-input::placeholder {
-  color: #94a3b8;
+  color: #888888;
+  font-weight: 400;
 }
 
 .container .form-container .form .input-box .form-input:focus {
-  border-color: #6366f1;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border-color: #00ffaa;
+  background: #1a1a1a;
+  box-shadow: 0 0 0 3px rgba(0, 255, 170, 0.15);
   transform: translateY(-1px);
+  color: #ffffff;
 }
 
 .container .form-container .form .input-box .form-input:hover {
-  border-color: #c7d2fe;
+  border-color: #00ffaa;
+  background: #2a2a2a;
 }
 
 .container .form-container .form .input-box .form-input.wrong-input {
-  border-color: #ef4444;
-  background: #fef2f2;
+  border-color: #ff4444;
+  background: #2a1515;
 }
 
 .container .form-container .form .input-box .alert-text {
   display: block;
   margin-top: 0.5rem;
-  color: #ef4444;
+  color: #ff7777;
   margin-left: 0.2rem;
   font-size: 0.75rem;
   font-weight: 500;
@@ -163,7 +169,7 @@ input {
   transform: translateY(-50%);
   font-size: 1.1rem;
   cursor: pointer;
-  color: #64748b;
+  color: #888888;
   padding: 0.3rem;
   transition: all 0.3s ease;
 }
@@ -171,7 +177,7 @@ input {
   pointer-events: none;
 }
 .container .form-container .form .input-box .eye-btn:hover {
-  color: #6366f1;
+  color: #00ffaa;
 }
 
 .container .form-container .form .ends-item {
@@ -184,13 +190,13 @@ input {
   width: 100%;
 }
 .container .form-container .form .ends-item .forgot-pass-text {
-  color: #6366f1;
+  color: #00ffaa;
   font-size: 0.85rem;
   font-weight: 500;
   transition: all 0.3s ease;
 }
 .container .form-container .form .ends-item .forgot-pass-text:hover {
-  color: #4f46e5;
+  color: #33ffbb;
   text-decoration: underline;
 }
 
@@ -198,10 +204,10 @@ input {
   padding: 0.85rem 1.5rem;
   border: none;
   border-radius: 40px;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
-  color: white;
+  background: linear-gradient(135deg, #00ffaa, #00cc88);
+  color: #0a0a0a;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   width: 100%;
@@ -211,28 +217,28 @@ input {
 
 .container .form-container .form .form-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(0, 255, 170, 0.5);
 }
 
 .container .form-container .form .navigate-link-wrapper {
   font-size: 0.85rem;
-  color: #475569;
+  color: #888888;
 }
 .container .form-container .form .navigate-link {
   font-size: 0.85rem;
   font-weight: 600;
-  color: #6366f1;
+  color: #00ffaa;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .container .form-container .form .navigate-link:hover {
-  color: #4f46e5;
+  color: #33ffbb;
   text-decoration: underline;
 }
 
 .container .panel-wrapper {
   width: 50%;
-  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  background: linear-gradient(135deg, #00ffaa, #00cc88);
   height: 100%;
   border-radius: 28px;
   display: flex;
@@ -256,7 +262,7 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(10, 10, 10, 0.3);
   border-radius: 50%;
   cursor: pointer;
   position: relative;
@@ -265,7 +271,7 @@ input {
   font-size: 1.3rem;
 }
 .container .panel-wrapper .follow-our-icons .follow-icon:hover {
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(10, 10, 10, 0.5);
   transform: translateY(-3px) scale(1.1);
 }
 .container .panel-wrapper .follow-our-icons .follow-icon::after {
@@ -274,8 +280,8 @@ input {
   top: -32px;
   left: 50%;
   transform: translateX(-50%);
-  background: #1e1b4b;
-  color: white;
+  background: #0a0a0a;
+  color: #00ffaa;
   padding: 0.25rem 0.6rem;
   border-radius: 8px;
   opacity: 0;
@@ -292,7 +298,7 @@ input {
 .container .panel-wrapper .panel-title {
   font-size: 2.5rem;
   font-weight: 800;
-  color: white;
+  color: #0a0a0a;
   letter-spacing: -1px;
   font-family: "Agent-Orange-d", "varela-round", sans-serif;
 }
@@ -300,18 +306,18 @@ input {
 .container .panel-wrapper .panel-text {
   font-size: 1rem;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(10, 10, 10, 0.8);
   font-family: "varela-round", system-ui, sans-serif;
 }
 
 .container .panel-wrapper .panel-btn {
   padding: 0.75rem 1.8rem;
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(10, 10, 10, 0.2);
+  border: 2px solid rgba(10, 10, 10, 0.3);
   border-radius: 40px;
-  color: white;
+  color: #0a0a0a;
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 250ms ease-in-out;
   letter-spacing: 0.5px;
@@ -319,13 +325,13 @@ input {
 }
 
 .container .panel-wrapper .panel-btn.active {
-  background: white;
-  color: #4f46e5;
-  border-color: white;
+  background: #0a0a0a;
+  color: #00ffaa;
+  border-color: #0a0a0a;
 }
 
 .container .panel-wrapper .panel-btn:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(10, 10, 10, 0.4);
   transform: translateY(-2px);
 }
 
