@@ -1,20 +1,19 @@
-/* ==============================
-   GLOBAL RESET & BASIC SETTINGS
-   - Removes default paddings/margins
-   - Ensures predictable sizing
-============================== */
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-/* ==============================
-   BODY LAYOUT & BACKGROUND
-   - Full viewport height
-   - Flex center layout
-   - Background image overlayed with dark gradient
-============================== */
+@font-face {
+  font-family: "Agent-Orange-d";
+  src: url("./assets/AgentOrange-font-d.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "varela-round";
+  src: url("./assets/varela-round.ttf") format("truetype");
+}
+
 body {
   width: 100%;
   height: 100dvh;
@@ -22,61 +21,35 @@ body {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.35)),
-    url("./assets/bg-body.jpg") center/cover no-repeat;
-  font-family: varela-round;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  font-family: "varela-round", system-ui, sans-serif;
 }
 
-/* ==============================
-   CUSTOM FONTS
-============================== */
-@font-face {
-  font-family: "Agent-Orange-d";
-  src: url("./assets/AgentOrange-font-d.ttf");
-}
-
-@font-face {
-  font-family: "varela-round";
-  src: url("./assets/varela-round.ttf");
-}
-
-/* ==============================
-   LINK DEFAULT STYLE
-============================== */
 a {
   text-decoration: none;
   color: inherit;
 }
 
-/* ==============================
-   FORM DEFAULT FONT
-============================== */
 button,
 input {
-  font-family: varela-round;
+  font-family: "varela-round", system-ui, sans-serif;
 }
 
-/* ==============================
-   MAIN WHITE CONTAINER
-   - Holds forms & panels
-   - Smooth transition for slide animation
-============================== */
 .container {
   width: 1000px;
   height: 640px;
   overflow: hidden;
-  background: #ffffff;
-  border-radius: 20px;
-  transition: all 2s linear;
+  background: white;
+  backdrop-filter: blur(10px);
+  border-radius: 28px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* ==============================
-   ACTIVE CONTAINER STATE
-   - Moves forms/panels horizontally when toggled
-============================== */
 .container.active .form-container {
   transform: translateX(100%);
 }
@@ -84,365 +57,311 @@ input {
   transform: translateX(-100%);
 }
 
-/* ==============================
-   FORM SECTION (LEFT SIDE)
-   - Vertical stacked layout
-============================== */
 .container .form-container {
   width: 50%;
-  background: #ffffffdd;
+  background: rgba(255, 255, 255, 0.95);
   height: 100%;
   display: flex;
   justify-content: center;
-  padding: 1rem 0.5rem;
+  padding: 2rem 1rem;
   align-items: center;
   flex-direction: column;
-  gap: 0.5rem;
-  transition: transform 2s ease;
+  gap: 1rem;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ==============================
-   FORM SECTION TITLE
-============================== */
 .container .form-container .form-title {
-  font-size: 1.3rem;
-  margin-bottom: 0.7rem;
-  color: #ccdbfd;
-  font-family: Agent-Orange-d;
-  background-color: #134074;
-  padding: 0.5rem;
-  border-radius: 16px;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #1e1b4b;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  font-family: "Agent-Orange-d", "varela-round", sans-serif;
 }
 
-/* ==============================
-   FORM STATES
-   - Only active form is visible & usable
-============================== */
 .container .form-container .form {
   opacity: 0;
   transform: translateY(20px);
   pointer-events: none;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
   position: absolute;
-  width: 100%;
+  width: 80%;
 }
 .container .form-container .form.active {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-  position: relative; /* puts form back in flow */
+  position: relative;
 }
 
-/* ==============================
-   FORM INPUT GROUP
-============================== */
 .container .form-container .form .input-box {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
-  margin: 0.4rem 0;
+  margin: 0.75rem 0;
 }
 
-/* ==============================
-   INPUT FIELDS
-   - Light shadow hover focus effect
-============================== */
 .container .form-container .form .input-box .form-input {
-  width: 70%;
-  padding: 0.75rem 1rem;
-  background: #ccdbfd;
-  border: 2px solid #13315c;
-  border-radius: 10px;
-  font-size: 1rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 16px;
+  font-size: 0.95rem;
   font-weight: 500;
-  color: #13315c;
+  color: #1e1b4b;
   transition: all 250ms ease-in-out;
   outline: none;
-  box-shadow: 0 4px 10px rgba(13, 48, 92, 0.1);
+  font-family: "varela-round", system-ui, sans-serif;
 }
 
-/* Placeholder color adjustments */
 .container .form-container .form .input-box .form-input::placeholder {
-  color: #2b2b2bfe;
-}
-.container .form-container .form .input-box .form-input:hover::placeholder {
-  color: #0b2545;
+  color: #94a3b8;
 }
 
-/* Focus state — stronger effect */
 .container .form-container .form .input-box .form-input:focus {
-  border-color: #134074;
-  background: #ccdbfd;
-  box-shadow: 0 6px 15px rgba(13, 48, 92, 0.2);
-  transform: translateY(-2px);
-}
-
-/* Hover visual feedback */
-.container .form-container .form .input-box .form-input:hover {
-  border-color: #134074;
-  box-shadow: 0 4px 15px rgba(19, 64, 116, 0.35),
-    0 0 10px rgba(19, 64, 116, 0.25);
+  border-color: #6366f1;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
   transform: translateY(-1px);
 }
 
-/* ==============================
-   INPUT ERROR STYLE
-============================== */
-.form-container .form-container .form .input-box .form-input.wrong-input {
-  border: 3px solid #ce3b3b;
+.container .form-container .form .input-box .form-input:hover {
+  border-color: #c7d2fe;
 }
 
-/* Error text under input */
+.container .form-container .form .input-box .form-input.wrong-input {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
 .container .form-container .form .input-box .alert-text {
   display: block;
   margin-top: 0.5rem;
-  color: #cf2828;
+  color: #ef4444;
   margin-left: 0.2rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  text-decoration: overline;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
-/* ==============================
-   PASSWORD FIELD (WITH EYE ICON)
-============================== */
 .container .form-container .form .input-box .password-box-inner {
   position: relative;
-  width: 70%;
+  width: 100%;
 }
 .container .form-container .form .input-box .password-input {
   width: 100%;
-  padding: 0.75rem 2.6rem 0.75rem 1rem;
+  padding: 0.85rem 3rem 0.85rem 1rem;
 }
 .container .form-container .form .input-box .eye-btn {
   position: absolute;
   top: 50%;
-  right: 0.8rem;
+  right: 1rem;
   transform: translateY(-50%);
   font-size: 1.1rem;
   cursor: pointer;
-  color: #134074;
+  color: #64748b;
   padding: 0.3rem;
   transition: all 0.3s ease;
 }
 .container .form-container .form .input-box .eye-btn i {
   pointer-events: none;
 }
+.container .form-container .form .input-box .eye-btn:hover {
+  color: #6366f1;
+}
 
-/* ==============================
-   FORM FOOTER ITEMS
-============================== */
 .container .form-container .form .ends-item {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
+  margin-top: 1rem;
   width: 100%;
 }
 .container .form-container .form .ends-item .forgot-pass-text {
-  color: #0b2545;
-  font-size: 1rem;
-  text-decoration: underline;
-  transition: all 0.5s linear;
+  color: #6366f1;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 .container .form-container .form .ends-item .forgot-pass-text:hover {
-  transform: scale(1.06);
+  color: #4f46e5;
+  text-decoration: underline;
 }
 
-/* ==============================
-   MAIN FORM BUTTON
-============================== */
 .container .form-container .form .form-btn {
-  padding: 0.6rem 1.2rem;
+  padding: 0.85rem 1.5rem;
   border: none;
-  border-radius: 12px;
-  background-color: #134074;
-  color: #ccdbfd;
-  font-size: 1rem;
+  border-radius: 40px;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: white;
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 8px rgba(19, 64, 116, 0.3);
-  width: 70%;
-  border: 2px solid #134074;
-  margin-bottom: 0.5rem;
+  width: 100%;
+  letter-spacing: 0.5px;
+  font-family: "varela-round", system-ui, sans-serif;
 }
 
-/* Button hover highlight */
 .container .form-container .form .form-btn:hover {
-  background-color: #ccdbfd;
-  color: #0b2545;
-  border-color: #0b2545;
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 6px 12px rgba(19, 64, 116, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
 }
 
-/* Navigate link under form */
+.container .form-container .form .navigate-link-wrapper {
+  font-size: 0.85rem;
+  color: #475569;
+}
 .container .form-container .form .navigate-link {
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #13315c;
-  text-decoration: underline;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6366f1;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .container .form-container .form .navigate-link:hover {
-  color: #8da9c4;
-  text-decoration: none;
-  transform: translateY(-1px);
+  color: #4f46e5;
+  text-decoration: underline;
 }
 
-/* ==============================
-   RIGHT PANEL (SOCIAL / TEXT / BUTTONS)
-============================== */
 .container .panel-wrapper {
   width: 50%;
-  background-color: #ccdbfd;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
   height: 100%;
-  border-radius: 1.5rem;
+  border-radius: 28px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transition: transform 2s ease;
-  gap: 0.7rem;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  gap: 1.2rem;
 }
 
-/* ==============================
-   FOLLOW ICONS
-   - Social media with tooltips
-============================== */
 .container .panel-wrapper .follow-our-icons {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.8rem;
-  margin-top: 1rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 .container .panel-wrapper .follow-our-icons .follow-icon {
-  padding: 0.6rem;
-  background-color: #134074;
-  color: #ccdbfd;
-  border-radius: 14px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
   cursor: pointer;
   position: relative;
   transition: all 350ms ease;
-  border: 2px solid transparent;
-  box-shadow: 0 3px 10px rgba(13, 48, 92, 0.25);
-}
-.container .panel-wrapper .follow-our-icons .follow-icon i {
+  color: white;
   font-size: 1.3rem;
-  transition: transform 300ms ease, color 300ms ease;
 }
-
-/* Icon hover effect */
 .container .panel-wrapper .follow-our-icons .follow-icon:hover {
-  background-color: #ccdbfd;
-  color: #051426;
-  border-color: #13315c;
-  transform: translateY(-3px) scale(1.08);
-  box-shadow: 0 6px 18px rgba(19, 49, 92, 0.35),
-    0 0 12px 4px rgba(204, 219, 253, 0.6);
+  background: rgba(255, 255, 255, 0.35);
+  transform: translateY(-3px) scale(1.1);
 }
-.container .panel-wrapper .follow-our-icons .follow-icon:hover i {
-  transform: scale(1.15);
-  color: #13315c;
-}
-
-/* Tooltip with custom text */
 .container .panel-wrapper .follow-our-icons .follow-icon::after {
   content: attr(data-hover-text);
   position: absolute;
-  top: -67%;
+  top: -32px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #13315c;
-  color: #ccdbfd;
+  background: #1e1b4b;
+  color: white;
   padding: 0.25rem 0.6rem;
   border-radius: 8px;
   opacity: 0;
   pointer-events: none;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   white-space: nowrap;
-  transition: opacity 350ms ease, transform 350ms ease;
+  transition: opacity 300ms ease;
+  font-family: "varela-round", system-ui, sans-serif;
 }
 .container .panel-wrapper .follow-our-icons .follow-icon:hover::after {
   opacity: 1;
-  transform: translate(-50%, -2px);
 }
 
-/* Panel title text */
 .container .panel-wrapper .panel-title {
-  font-family: Agent-Orange-d;
-  font-size: 2.2rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: -1px;
+  font-family: "Agent-Orange-d", "varela-round", sans-serif;
 }
 
-/* Panel description */
 .container .panel-wrapper .panel-text {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-
-
-/* ==============================
-   Panel Button
-============================== */
-.container .panel-wrapper .panel-btn {
-  align-self: center;
-  background-color: #eef4ed;
-  background-image: none;
-  background-position: 0 90%;
-  background-repeat: repeat no-repeat;
-  background-size: 4px 3px;
-  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
-  border-style: solid;
-  border-width: 2px;
-  border-color: #13315c;
-  box-shadow: rgba(13, 48, 92, 0.25) 10px 20px 20px -10px;
-  box-sizing: border-box;
-  color: #051426;
-  cursor: pointer;
-  display: inline-block;
-  font-family: varela-round, Agent-Orange-d;
   font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "varela-round", system-ui, sans-serif;
+}
+
+.container .panel-wrapper .panel-btn {
+  padding: 0.75rem 1.8rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 40px;
+  color: white;
+  font-size: 0.85rem;
   font-weight: 600;
-  line-height: 23px;
-  outline: none;
-  padding: 0.75rem 1.2rem;
-  text-decoration: none;
+  cursor: pointer;
   transition: all 250ms ease-in-out;
-  border-bottom-left-radius: 15px 255px;
-  border-bottom-right-radius: 225px 15px;
-  border-top-left-radius: 255px 15px;
-  border-top-right-radius: 15px 225px;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.5px;
+  font-family: "varela-round", system-ui, sans-serif;
 }
 
-/* ==============================
-   Active Panel Button
-============================== */
 .container .panel-wrapper .panel-btn.active {
-  background-color: #134074;
-  color: #ffffff;
-  border-color: #0b2545;
-  box-shadow: rgba(13, 48, 92, 0.3) 6px 12px 15px -5px;
+  background: white;
+  color: #4f46e5;
+  border-color: white;
 }
 
-.container .panel-wrapper .panel-btn:hover {
-  box-shadow: rgba(13, 48, 92, 0.35) 4px 10px 10px -5px;
-  transform: translateY(2px) scale(1.08);
-  background-color: #8da9c4;
-  color: #ffffff;
+.container .panel-wrapper .panel-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
 }
 
-.container .panel-wrapper .panel-btn:focus {
-  box-shadow: rgba(13, 48, 92, 0.4) 3px 6px 5px -4px;
+.btn-container {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    height: auto;
+    min-height: 600px;
+    flex-direction: column;
+  }
+
+  .container .form-container,
+  .container .panel-wrapper {
+    width: 100%;
+    min-height: 400px;
+  }
+
+  .container.active .form-container {
+    transform: translateY(100%);
+  }
+
+  .container.active .panel-wrapper {
+    transform: translateY(-100%);
+  }
+
+  .container .form-container .form {
+    width: 90%;
+  }
+
+  .container .panel-wrapper .panel-title {
+    font-size: 1.8rem;
+  }
 }

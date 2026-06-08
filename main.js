@@ -1,250 +1,188 @@
-// ==============================
-// Select elements from DOM
-// ==============================
-const panelBtn = document.querySelectorAll(".panel-btn"); // All panel toggle buttons
-const container = document.querySelector(".container"); // Main container
-const loginBtn = document.querySelector(".login-btn"); // Login panel button
-const registerBtn = document.querySelector(".register-btn"); // Register panel button
-const loginForm = document.querySelector(".login-form"); // Login form
-const registerForm = document.querySelector(".register-form"); // Register form
-const eyebuttons = document.querySelectorAll(".eye-btn"); // Eye toggle buttons for password visibility
-const navigateLinks = document.querySelectorAll(".navigate-link"); // Links inside forms for switching
-const alertTexts = document.querySelectorAll(".alert-text"); // All alert messages
-
-// ==============================
-// Login Elements
-// ==============================
-const loginEmailInput = document.getElementById("login-email-input"); // Login email input
-const loginEmailAlert = document.getElementById("login-email-alert"); // Login email alert
-const loginPasswordInput = document.getElementById("login-password-input"); // Login password input
-const loginPasswordAlert = document.getElementById("login-password-alert"); // Login password alert
-
-// ==============================
-// Register Elements
-// ==============================
-const registerEmailInput = document.querySelector("#register-email-input"); // Register email input
-const registerEmailAlert = document.querySelector("#register-email-alert"); // Register email alert
+const panelBtn = document.querySelectorAll(".panel-btn");
+const container = document.querySelector(".container");
+const loginBtn = document.querySelector(".login-btn");
+const registerBtn = document.querySelector(".register-btn");
+const loginForm = document.querySelector(".login-form");
+const registerForm = document.querySelector(".register-form");
+const eyebuttons = document.querySelectorAll(".eye-btn");
+const navigateLinks = document.querySelectorAll(".navigate-link");
+const loginEmailInput = document.getElementById("login-email-input");
+const loginEmailAlert = document.getElementById("login-email-alert");
+const loginPasswordInput = document.getElementById("login-password-input");
+const loginPasswordAlert = document.getElementById("login-password-alert");
+const registerEmailInput = document.querySelector("#register-email-input");
+const registerEmailAlert = document.querySelector("#register-email-alert");
 const registerConfirmPasswordInput = document.querySelector(
-  "#register-confirm-password-input"
-); // Confirm password input
+  "#register-confirm-password-input",
+);
 const registerConfirmPasswordAlert = document.querySelector(
-  "#register-confirm-password-alert"
-); // Confirm password alert
+  "#register-confirm-password-alert",
+);
 const registerPasswordInput = document.querySelector(
-  "#register-password-input"
-); // Register password input
+  "#register-password-input",
+);
 const registerPasswordAlert = document.querySelector(
-  "#register-password-alert"
-); // Register password alert
-const formTitle = document.querySelector(".form-title"); // Form title text
+  "#register-password-alert",
+);
+const formTitle = document.querySelector(".form-title");
 
-// ==============================
-// Toggle container active state when panel button clicked
-// ==============================
 panelBtn.forEach((btn) => {
   btn.addEventListener("click", () => {
-    container.classList.toggle("active"); // Toggle active class on main container
+    container.classList.toggle("active");
   });
 });
 
-// ==============================
-// Switch to Login form
-// ==============================
 loginBtn.addEventListener("click", () => {
-  registerBtn.classList.remove("active"); // Remove active from register
-  loginBtn.classList.add("active"); // Add active to login
-  loginForm.classList.add("active"); // Show login form
-  registerForm.classList.remove("active"); // Hide register form
-  formTitle.textContent = "Sign In"; // Update form title
+  registerBtn.classList.remove("active");
+  loginBtn.classList.add("active");
+  loginForm.classList.add("active");
+  registerForm.classList.remove("active");
+  formTitle.textContent = "Sign In";
 });
 
-// ==============================
-// Switch to Register form
-// ==============================
 registerBtn.addEventListener("click", () => {
-  loginBtn.classList.remove("active"); // Remove active from login
-  registerBtn.classList.add("active"); // Add active to register
-  loginForm.classList.remove("active"); // Hide login form
-  registerForm.classList.add("active"); // Show register form
-  formTitle.textContent = "Sign Up"; // Update form title
+  loginBtn.classList.remove("active");
+  registerBtn.classList.add("active");
+  loginForm.classList.remove("active");
+  registerForm.classList.add("active");
+  formTitle.textContent = "Sign Up";
 });
 
-// ==============================
-// Toggle password visibility
-// ==============================
 eyebuttons.forEach((btn) => {
   btn.addEventListener("click", (e) => {
-    const input = btn.previousElementSibling; // Get input before eye button
+    const input = btn.previousElementSibling;
+    const icon = btn.querySelector("i");
     if (input.type === "password") {
-      input.type = "text"; // Show password
-      e.target.firstElementChild.classList.replace("fa-lock", "fa-lock-open"); // Change icon
+      input.type = "text";
+      icon.classList.remove("fa-eye");
+      icon.classList.add("fa-eye-slash");
     } else {
-      input.type = "password"; // Hide password
-      e.target.firstElementChild.classList.replace("fa-lock-open", "fa-lock"); // Change icon back
+      input.type = "password";
+      icon.classList.remove("fa-eye-slash");
+      icon.classList.add("fa-eye");
     }
   });
 });
 
-// ==============================
-// Navigate links inside forms
-// ==============================
 navigateLinks.forEach((links) => {
   links.addEventListener("click", (e) => {
-    const dataLink = e.target.dataset.link; // Check which link was clicked
+    e.preventDefault();
+    const dataLink = links.dataset.link;
     if (dataLink === "register") {
-      registerBtn.click(); // Switch to register form
+      registerBtn.click();
     } else if (dataLink === "login") {
-      loginBtn.click(); // Switch to login form
+      loginBtn.click();
     }
   });
 });
 
-// ==============================
-// Validate login form before submitting
-// ==============================
+const emailFormat =
+  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 loginForm.addEventListener("submit", (e) => {
   if (!validateLoginForm()) {
-    e.preventDefault(); // Prevent submission if invalid
+    e.preventDefault();
   }
 });
 
-// ==============================
-// Login Email Validation on input
-// ==============================
-loginEmailInput.addEventListener("input", (e) => {
-  const emailFormat =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  if (!e.target.value.match(emailFormat)) {
-    e.target.classList.add("wrong-input"); // Add red border for invalid
-    loginEmailAlert.textContent = "Enter valid email baby!  😱"; // Show alert
-  } else {
-    e.target.classList.remove("wrong-input"); // Remove red border
-    loginEmailAlert.textContent = ""; // Clear alert
-  }
-});
-
-// ==============================
-// Login Password Validation on input
-// ==============================
-loginPasswordInput.addEventListener("input", (e) => {
-  if (e.target.value.length < 6) {
-    e.target.classList.add("wrong-input"); // Add red border for short password
-    loginPasswordAlert.textContent = "Enter more than 6 character! 😱"; // Show alert
-  } else {
-    e.target.classList.remove("wrong-input"); // Remove red border
-    loginPasswordAlert.textContent = ""; // Clear alert
-  }
-});
-
-// ==============================
-// Login Form Validation Function
-// ==============================
-const validateLoginForm = () => {
-  const emailFormat =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+loginEmailInput.addEventListener("input", () => {
   if (!loginEmailInput.value.match(emailFormat)) {
     loginEmailInput.classList.add("wrong-input");
-    loginEmailAlert.textContent = "Enter valid email baby!  😱";
+    loginEmailAlert.textContent = "Enter valid email! 😱";
+  } else {
+    loginEmailInput.classList.remove("wrong-input");
+    loginEmailAlert.textContent = "";
+  }
+});
+
+loginPasswordInput.addEventListener("input", () => {
+  if (loginPasswordInput.value.length < 6) {
+    loginPasswordInput.classList.add("wrong-input");
+    loginPasswordAlert.textContent = "Enter more than 6 characters! 😱";
+  } else {
+    loginPasswordInput.classList.remove("wrong-input");
+    loginPasswordAlert.textContent = "";
+  }
+});
+
+const validateLoginForm = () => {
+  if (!loginEmailInput.value.match(emailFormat)) {
+    loginEmailInput.classList.add("wrong-input");
+    loginEmailAlert.textContent = "Enter valid email! 😱";
     return false;
   }
   if (loginPasswordInput.value.length < 6) {
     loginPasswordInput.classList.add("wrong-input");
-    loginPasswordAlert.textContent = "Enter more than 6 character! 😱";
+    loginPasswordAlert.textContent = "Enter more than 6 characters! 😱";
     return false;
   }
-  return true; // Form is valid
+  return true;
 };
 
-// ==============================
-// Validate register form before submitting
-// ==============================
 registerForm.addEventListener("submit", (e) => {
   if (!validateRegisterForm()) {
-    e.preventDefault(); // Prevent submission if invalid
+    e.preventDefault();
   }
 });
 
-// ==============================
-// Register Email Validation on input
-// ==============================
 registerEmailInput.addEventListener("input", () => {
-  const emailFormat =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (!registerEmailInput.value.match(emailFormat)) {
     registerEmailInput.classList.add("wrong-input");
-    registerEmailAlert.textContent = "Enter valid email baby!  😱";
+    registerEmailAlert.textContent = "Enter valid email! 😱";
   } else {
     registerEmailInput.classList.remove("wrong-input");
     registerEmailAlert.textContent = "";
   }
 });
 
-// ==============================
-// Register Password Validation on input
-// ==============================
 registerPasswordInput.addEventListener("input", () => {
   if (registerPasswordInput.value.length < 6) {
     registerPasswordInput.classList.add("wrong-input");
-    registerPasswordAlert.textContent = "Enter more than 6 character! 😱";
+    registerPasswordAlert.textContent = "Enter more than 6 characters! 😱";
   } else {
     registerPasswordInput.classList.remove("wrong-input");
     registerPasswordAlert.textContent = "";
   }
 });
 
-// ==============================
-// Register Confirm Password Validation on input
-// ==============================
 registerConfirmPasswordInput.addEventListener("input", () => {
   if (registerConfirmPasswordInput.value.length < 6) {
     registerConfirmPasswordInput.classList.add("wrong-input");
     registerConfirmPasswordAlert.textContent =
-      "Enter more than 6 character! 😱";
+      "Enter more than 6 characters! 😱";
   } else if (
     registerConfirmPasswordInput.value !== registerPasswordInput.value
   ) {
     registerConfirmPasswordInput.classList.add("wrong-input");
-    registerConfirmPasswordAlert.textContent = "Passwords doesn't Match🎃🤦‍♂️";
+    registerConfirmPasswordAlert.textContent = "Passwords don't match! 🎃";
   } else {
     registerConfirmPasswordInput.classList.remove("wrong-input");
     registerConfirmPasswordAlert.textContent = "";
   }
 });
 
-// ==============================
-// Register Form Validation Function
-// ==============================
 const validateRegisterForm = () => {
-  const emailFormat =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  // Validate email
   if (!registerEmailInput.value.match(emailFormat)) {
     registerEmailInput.classList.add("wrong-input");
-    registerEmailAlert.textContent = "Enter valid email baby!  😱";
+    registerEmailAlert.textContent = "Enter valid email! 😱";
     return false;
   }
-
-  // Validate password length
   if (registerPasswordInput.value.length < 6) {
     registerPasswordInput.classList.add("wrong-input");
-    registerPasswordAlert.textContent = "Enter more than 6 character! 😱";
+    registerPasswordAlert.textContent = "Enter more than 6 characters! 😱";
     return false;
   }
-
-  // Validate confirm password length
   if (registerConfirmPasswordInput.value.length < 6) {
     registerConfirmPasswordInput.classList.add("wrong-input");
     registerConfirmPasswordAlert.textContent =
-      "Enter more than 6 character! 😱";
+      "Enter more than 6 characters! 😱";
     return false;
   } else if (
     registerConfirmPasswordInput.value !== registerPasswordInput.value
   ) {
     registerConfirmPasswordInput.classList.add("wrong-input");
-    registerConfirmPasswordAlert.textContent = "Passwords doesn't Match🎃🤦‍♂️";
+    registerConfirmPasswordAlert.textContent = "Passwords don't match! 🎃";
     return false;
   }
-
-  return true; // Form is valid
+  return true;
 };
